@@ -1,13 +1,14 @@
 package org.kodluyoruz.concrete;
 
 public class Queue <T> implements org.kodluyoruz.abstrct.Queue<T> {
-    int length=0;
+    public int length=0;
     T variable;
     Queue<T> queueHead=null;
     Queue<T> queueTail=null;
     Queue<T> queueNext=null;
     Queue<T> queuePrevious=null;
-    T head=null;
+    Queue<T> temporaryVariable;
+    Queue next;
     public Queue(){}
     public Queue(T t){
         this.variable=  t;
@@ -20,31 +21,28 @@ public class Queue <T> implements org.kodluyoruz.abstrct.Queue<T> {
             this.queueTail=queue;
             this.length=1;
         }else{
-            //queue.queueNext=this.queueHead;
-            queue.queueNext=this.queueTail;
-            this.queuePrevious=queue;
-            this.queueTail=queue;
+            this.queueTail.next=queue;
+            this.queueTail=this.queueTail.next;
             ++this.length;
         }
-        System.out.println("queueHead "+queueHead.variable+" queueTail "+queueTail.variable);
+        System.out.println("queueHead "+this.queueHead.variable+" queueTail "+this.queueTail.variable);
     }
 
     @Override
     public T pool() {
-        if (queueHead==null){
+        if (this.queueHead==null){
             System.out.println("No items queue");
+            return null;
         }else{
-            System.out.println("********************");
-            head= queueHead.variable;
-            queueHead=queueTail.queueNext;
-            System.out.println("Head: "+head+" queue Head: "+queueHead.variable+" queue Tail: "+queueTail.variable);
+            this.temporaryVariable=this.queueHead;
+            this.queueHead=this.queueHead.next;
+            return  this.temporaryVariable.variable;
         }
-        return head;
+
     }
 
     @Override
     public T peek() {
-
         return queueHead.variable;
     }
 }

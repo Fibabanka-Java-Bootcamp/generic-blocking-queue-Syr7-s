@@ -12,10 +12,12 @@ public class Main {
 
         integerQueue.add(5);
         integerQueue.add(6);
+        System.out.println(integerQueue.length);
         integerQueue.add(7);
-
+        System.out.println(integerQueue.length);
         Queue<String> stringQueue=new org.kodluyoruz.concrete.Queue<String>();
         stringQueue.add("Isa");
+
         stringQueue.add("Musa");
         stringQueue.add("Tugba");
         stringQueue.add("Fatih");
@@ -31,6 +33,7 @@ public class Main {
         stringQueue.pool();
         System.out.println(stringQueue.peek());
         stringQueue.pool();
+        System.out.println(stringQueue.peek());
         System.out.println(integerQueue.peek());
 
 
