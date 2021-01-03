@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Queue<T> {
-    public int length = 0;
+    private int length = 0;
     private T variable;
     private Queue<T> queueHead = null;
     private Queue<T> queueTail = null;
