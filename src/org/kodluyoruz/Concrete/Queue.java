@@ -1,12 +1,16 @@
 package org.kodluyoruz.Concrete;
 
-public class Queue<T> implements org.kodluyoruz.Abstract.Queue<T> {
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+public class Queue<T> {
     public int length = 0;
     private T variable;
     private Queue<T> queueHead = null;
     private Queue<T> queueTail = null;
     private Queue<T> temporaryVariable;
-    private Queue queueNext;
+    private Queue<T> queueNext;
+    private Object lock = new Object();
 
     public Queue() {
     }
@@ -47,37 +51,38 @@ public class Queue<T> implements org.kodluyoruz.Abstract.Queue<T> {
         this.queueNext = queueNext;
     }
 
-
-    @Override
-    public void add(T t) {
-        Queue queue = new Queue(t);
-        if (this.queueHead == null) {
-            this.queueHead = queue;
-            this.queueTail = queue;
-            this.length = 1;
-        } else {
-            this.queueTail.queueNext = queue;
-            this.queueTail = this.queueTail.queueNext;
-            ++this.length;
+    Consumer<T> add = (t) -> {
+        synchronized (lock) {
+            Queue queue = new Queue(t);
+            if (this.queueHead == null) {
+                this.queueHead = queue;
+                this.queueTail = queue;
+                this.length = 1;
+            } else {
+                this.queueTail.queueNext = queue;
+                this.queueTail = this.queueTail.queueNext;
+                ++this.length;
+            }
+            System.out.println("queueHead " + this.queueHead.variable + " queueTail " + this.queueTail.variable+" Queue Length : "+this.length);
         }
-        System.out.println("queueHead " + this.queueHead.variable + " queueTail " + this.queueTail.variable);
-    }
-
-    @Override
-    public T pool() {
-        if (this.queueHead == null) {
-            System.out.println("No items queue");
-            return null;
-        } else {
-            this.temporaryVariable = this.queueHead;
-            this.queueHead = this.queueHead.queueNext;
-            return this.temporaryVariable.variable;
+    };
+    Supplier<T> pool = () -> {
+        synchronized (lock) {
+            if (this.queueHead == null) {
+                System.out.println("No items queue");
+                return null;
+            } else {
+                this.temporaryVariable = this.queueHead;
+                this.queueHead = this.queueHead.queueNext;
+                return this.temporaryVariable.variable;
+            }
         }
+    };
+    Supplier<T> peek = () -> {
+        synchronized (lock) {
+            return this.queueHead !=null ? this.queueHead.variable : null;
+        }
+    };
 
-    }
 
-    @Override
-    public T peek() {
-        return queueHead.variable;
-    }
 }

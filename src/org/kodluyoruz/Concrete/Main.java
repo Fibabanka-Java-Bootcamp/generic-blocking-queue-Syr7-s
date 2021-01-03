@@ -1,4 +1,4 @@
-package org.kodluyoruz;
+package org.kodluyoruz.Concrete;
 
 import org.kodluyoruz.Concrete.Queue;
 
@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        System.out.println("Integer Data Type.");
+        /*System.out.println("Integer Data Type.");
         Queue<Integer> integerQueue = new org.kodluyoruz.Concrete.Queue<>();
         System.out.println("Add Method");
         integerQueue.add(5);
@@ -49,7 +49,7 @@ public class Main {
         System.out.println("The Pool method was executed:  ");
         stringQueue.pool();
         System.out.println("The Peek method was executed: "+stringQueue.peek());
-
+*/
 
 
     }
