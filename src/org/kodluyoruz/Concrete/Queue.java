@@ -63,7 +63,7 @@ public class Queue<T> {
                 this.queueTail = this.queueTail.queueNext;
                 ++this.length;
             }
-            System.out.println("queueHead " + this.queueHead.variable + " queueTail " + this.queueTail.variable+" Queue Length : "+this.length);
+            System.out.println("queueHead " + this.queueHead.variable + " queueTail " + this.queueTail.variable + " Queue Length : " + this.length);
         }
     };
     Supplier<T> pool = () -> {
@@ -80,7 +80,7 @@ public class Queue<T> {
     };
     Supplier<T> peek = () -> {
         synchronized (lock) {
-            return this.queueHead !=null ? this.queueHead.variable : null;
+            return this.queueHead != null ? this.queueHead.variable : null;
         }
     };
 
