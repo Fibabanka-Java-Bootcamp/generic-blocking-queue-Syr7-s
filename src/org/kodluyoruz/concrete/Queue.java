@@ -1,4 +1,4 @@
-package org.kodluyoruz.Concrete;
+package org.kodluyoruz.concrete;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

@@ -1,6 +1,4 @@
-package org.kodluyoruz.Concrete;
-
-import org.kodluyoruz.Concrete.Queue;
+package org.kodluyoruz.concrete;
 
 public class Main {
 
